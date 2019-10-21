@@ -28,11 +28,9 @@ public class CategoryController {
      * @return
      */
     @GetMapping("/categories")
-    public ResponseEntity<Map> getAllCategories(){
-        Map<String, List<CategoryResponseObj>> maps= new HashMap<>();
+    public ResponseEntity<List<CategoryResponseObj>> getAllCategories(){
         log.info("Finding all categories.");
-        maps.put("rows", categoryService.findAll());
-        return ResponseEntity.ok(maps);
+        return ResponseEntity.ok(categoryService.findAll());
     }
 
     /**

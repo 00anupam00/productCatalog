@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 @SpringBootApplication
-@EnableJpaRepositories("com.turingapp.myapp.repository")
+@EnableJpaRepositories("com.adcash.productcatalog.repository")
 public class MyappApplication {
 
 	public static void main(String[] args) {

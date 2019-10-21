@@ -23,11 +23,6 @@ public class Category implements Serializable {
         @Column(length = 1000)
         private String description;
 
-        @ManyToOne(targetEntity = Department.class, fetch = FetchType.LAZY)
-        @JoinColumn(name = "department_id", referencedColumnName = "department_id")
-        @JsonBackReference
-        private Department department;
-
         @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
         @JoinTable(
                 name = "product_category",

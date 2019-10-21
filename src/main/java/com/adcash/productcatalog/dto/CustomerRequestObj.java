@@ -31,11 +31,6 @@ public class CustomerRequestObj implements Serializable {
     private String region;
     @JsonAlias("postal_code")
     private String postalCode;
-    @JsonAlias("shipping_region_id")
-    private int shippingRegionId;
     private String country;
-    private String dayPhone;
-    private String evePhone;
     private String mobPhone;
-
 }

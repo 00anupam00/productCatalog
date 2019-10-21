@@ -2,7 +2,6 @@ package com.adcash.productcatalog.controller;
 
 import com.adcash.productcatalog.dto.ErrorResponseObj;
 import com.adcash.productcatalog.exceptions.*;
-import com.turingapp.myapp.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -80,7 +80,7 @@ public class CategoryControllerTest extends TestDataUtil {
                         .accept(MediaType.APPLICATION_JSON_UTF8)
                         .header(Constants.HEADER_STRING, this.token))
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].categoryId").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].category_id").value(1))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
                 .andDo(MockMvcResultHandlers.print());
     }
@@ -110,22 +110,7 @@ public class CategoryControllerTest extends TestDataUtil {
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .accept(MediaType.APPLICATION_JSON_UTF8)
                         .header(Constants.HEADER_STRING, this.token))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].name").value("Category 1"))
-                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    public void getAllCategoriesByDepartment() throws Exception {
-        Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
-        Mockito.when(categoryRepository.findAllByDepartment(Mockito.anyInt())).thenReturn(getCategoryList());
-        mockClient.perform(
-                MockMvcRequestBuilders
-                        .get("/categories/inDepartment/1")
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .accept(MediaType.APPLICATION_JSON_UTF8)
-                        .header(Constants.HEADER_STRING, this.token))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].name").value("Category 1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Category 1"))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
                 .andDo(MockMvcResultHandlers.print());
     }

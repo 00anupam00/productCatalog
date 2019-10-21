@@ -53,20 +53,6 @@ public class Customer implements Serializable {
     @Column(name = "country", length = 100)
     private String country;
 
-/*    @Column(name = "shipping_region_id")
-    @NotNull
-    private int shippingRegionId= 1; //defaults to 1*/
-
-    @ManyToOne(targetEntity = ShippingRegion.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "shipping_region_id", referencedColumnName = "shipping_region_id")
-    private ShippingRegion shippingRegion;
-
-    @Column(name = "day_phone", length = 100)
-    private String dayPhone;
-
-    @Column(name = "eve_phone", length = 100)
-    private String evePhone;
-
     @Column(name = "mob_phone", length = 100)
     private String mobPhone;
 

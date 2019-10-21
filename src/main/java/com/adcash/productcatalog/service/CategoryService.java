@@ -2,6 +2,7 @@ package com.adcash.productcatalog.service;
 
 import com.adcash.productcatalog.dao.Category;
 import com.adcash.productcatalog.dto.CategoryResponseObj;
+import com.adcash.productcatalog.exceptions.CategoryException;
 import com.adcash.productcatalog.util.Constants;
 import com.adcash.productcatalog.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,6 @@ public class CategoryService {
                 category -> {
                     CategoryResponseObj categoryResponseObj= new CategoryResponseObj();
                     categoryResponseObj.setCategory_id(category.getCategoryId());
-                    categoryResponseObj.setDepartment_id(category.getDepartment().getDepartmentId());
                     categoryResponseObj.setDescription(category.getDescription());
                     categoryResponseObj.setName(category.getName());
                     categoryResponseObjs.add(categoryResponseObj);
@@ -39,7 +39,6 @@ public class CategoryService {
                 .orElseThrow(() -> new CategoryException(Constants.CAT_01_CODE, HttpStatus.NOT_FOUND.value(), Constants.CAT_01_MESSAGE, "category_id"));
         CategoryResponseObj categoryResponseObj= new CategoryResponseObj();
         categoryResponseObj.setCategory_id(category.getCategoryId());
-        categoryResponseObj.setDepartment_id(category.getDepartment().getDepartmentId());
         categoryResponseObj.setDescription(category.getDescription());
         categoryResponseObj.setName(category.getName());
         return categoryResponseObj;
@@ -50,25 +49,8 @@ public class CategoryService {
                 .orElseThrow(() -> new CategoryException(Constants.CAT_01_CODE, HttpStatus.NOT_FOUND.value(), Constants.CAT_01_MESSAGE, "product_id"));
         CategoryResponseObj categoryResponseObj= new CategoryResponseObj();
         categoryResponseObj.setCategory_id(category.getCategoryId());
-        categoryResponseObj.setDepartment_id(category.getDepartment().getDepartmentId());
         categoryResponseObj.setDescription(category.getDescription());
         categoryResponseObj.setName(category.getName());
         return categoryResponseObj;
-    }
-
-    public List<CategoryResponseObj> findAllByDepartment(int departmentId) {
-        List<Category> categoryList= categoryRepository.findAllByDepartment(departmentId);
-        List<CategoryResponseObj> categoryResponseObjs= new ArrayList<>();
-        categoryList.forEach(
-                category -> {
-                    CategoryResponseObj categoryResponseObj= new CategoryResponseObj();
-                    categoryResponseObj.setCategory_id(category.getCategoryId());
-                    categoryResponseObj.setDepartment_id(category.getDepartment().getDepartmentId());
-                    categoryResponseObj.setDescription(category.getDescription());
-                    categoryResponseObj.setName(category.getName());
-                    categoryResponseObjs.add(categoryResponseObj);
-                }
-        );
-        return categoryResponseObjs;
     }
 }

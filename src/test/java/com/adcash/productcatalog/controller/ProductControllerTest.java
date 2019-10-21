@@ -48,10 +48,6 @@ public class ProductControllerTest extends TestDataUtil {
 
     @MockBean
     ProductRepository productRepository;
-    @MockBean
-    ReviewRepository reviewRepository;
-    @MockBean
-    CategoryRepository categoryRepository;
 
     @MockBean
     CustomerRepository customerRepository;
@@ -75,49 +71,27 @@ public class ProductControllerTest extends TestDataUtil {
 
     @Test
     public void findAll() throws Exception {
-        Mockito.when(productRepository.findAll(Mockito.any(Pageable.class))).thenReturn(getProductResponseList());
+        Mockito.when(productRepository.findAll()).thenReturn(getProductResponseList());
         Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
         mockClient.perform(
                 MockMvcRequestBuilders
                         .get("/products")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(objectMapper.writeValueAsString(getSearchObj()))
-                        .accept(MediaType.APPLICATION_JSON_UTF8)
-                        .header(Constants.HEADER_STRING, this.token))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.paginationMetadata.currentPage").value(2))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.rows").value(Matchers.notNullValue()))
-                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    public void searchProduct() throws Exception{
-        Mockito.when(productRepository.findAll(Mockito.any(Pageable.class))).thenReturn(getProductResponseList());
-        Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
-        mockClient.perform(
-                MockMvcRequestBuilders
-                        .get("/products/search")
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .param("query_String","")
-                        .param("all_words","on")
-                        .content(objectMapper.writeValueAsString(getSearchObj()))
-                        .accept(MediaType.APPLICATION_JSON_UTF8)
-                        .header(Constants.HEADER_STRING, this.token))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].productId").value(1))
+                        .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.jsonPath("$").value(Matchers.hasSize(2)))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
                 .andDo(MockMvcResultHandlers.print());
     }
 
     @Test
     public void getProduct() throws Exception {
-        Mockito.when(productRepository.findById(Mockito.anyInt())).thenReturn(Optional.ofNullable(getProductResponseList().getContent().get(0)));
+        Mockito.when(productRepository.findById(Mockito.anyInt())).thenReturn(Optional.ofNullable(getProductResponseList().get(0)));
         Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
         mockClient.perform(
                 MockMvcRequestBuilders
                         .get("/products/1")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .accept(MediaType.APPLICATION_JSON_UTF8)
-                        .header(Constants.HEADER_STRING, this.token))
+                        .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.productId").value(1))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
                 .andDo(MockMvcResultHandlers.print());
@@ -125,65 +99,15 @@ public class ProductControllerTest extends TestDataUtil {
 
     @Test
     public void getAllProductsInCategory() throws Exception {
-        Mockito.when(productRepository.findAllByCategory(Mockito.anyInt())).thenReturn(Optional.ofNullable(getProductResponseList().getContent()));
+        Mockito.when(productRepository.findAllByCategory(Mockito.anyInt())).thenReturn(Optional.ofNullable(getProductResponseList()));
         Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
         mockClient.perform(
                 MockMvcRequestBuilders
                         .get("/products/inCategory/3")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .accept(MediaType.APPLICATION_JSON_UTF8)
-                        .content(objectMapper.writeValueAsString(getSearchObj()))
-                        .header(Constants.HEADER_STRING, this.token))
+                        .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.rows.[0].productId").exists())
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    public void getAllProductInDepartment() throws Exception {
-        Mockito.when(categoryRepository.findAllByDepartment(Mockito.anyInt())).thenReturn(getCategoryList());
-        Mockito.when(productRepository.findAllByCategory(Mockito.anyInt())).thenReturn(Optional.ofNullable(getProductResponseList().getContent()));
-        Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
-        mockClient.perform(
-                MockMvcRequestBuilders
-                        .get("/products/inDepartment/3")
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .accept(MediaType.APPLICATION_JSON_UTF8)
-                        .content(objectMapper.writeValueAsString(getSearchObj()))
-                        .header(Constants.HEADER_STRING, this.token))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.rows.[0].productId").exists())
-                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    public void getReviewsOfProduct() throws Exception {
-        Mockito.when(reviewRepository.findAllReviewsByProduct(Mockito.anyInt())).thenReturn(getReviewList());
-        Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
-        mockClient.perform(
-                MockMvcRequestBuilders
-                        .get("/products/2/reviews")
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .accept(MediaType.APPLICATION_JSON_UTF8)
-                        .header(Constants.HEADER_STRING, this.token))
-                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    public void postReviewForProduct() throws Exception {
-        Mockito.when(reviewRepository.save(Mockito.any(Review.class))).thenReturn(getReviewRequestObj());
-        Mockito.when(productRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getProductResponseList().getContent().get(0)));
-        Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
-        mockClient.perform(
-                MockMvcRequestBuilders
-                        .post("/products/2/reviews")
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(objectMapper.writeValueAsString(getReviewRequestObj()))
-                        .accept(MediaType.APPLICATION_JSON_UTF8)
-                        .header(Constants.HEADER_STRING, this.token))
-                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Anupam"))
                 .andDo(MockMvcResultHandlers.print());
     }
 }

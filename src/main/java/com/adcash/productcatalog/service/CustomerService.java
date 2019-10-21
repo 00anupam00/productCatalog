@@ -28,9 +28,6 @@ public class CustomerService extends Validators {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private ShippingRegionRepository shippingRegionRepository;
-
-    @Autowired
     private EntityManagerFactory entityManagerFactory;
     private Session session;
 
@@ -49,13 +46,10 @@ public class CustomerService extends Validators {
         errorIfEmailExists(customerRequestObj);
         isPasswordValid(customerRequestObj.getPassword());
         validateName(customerRequestObj.getName());
-        ShippingRegion shippingRegion= this.session.load(ShippingRegion.class,1);
-        shippingRegion.setShippingRegionId(1);
         Customer customer = new Customer();
         customer.setName(customerRequestObj.getName());
         customer.setEmail(customerRequestObj.getEmail());
         customer.setPassword(customerRequestObj.getPassword());
-        customer.setShippingRegion(shippingRegion);
 
         Customer savedCustomer= customerRepository.save(customer);
 
@@ -73,24 +67,18 @@ public class CustomerService extends Validators {
 
     public Customer update(Customer existingCustomer, CustomerRequestObj customerRequestObj) throws UserException {
         validateEmail(customerRequestObj.getEmail());
-        isPhoneNumberValid(customerRequestObj.getMobPhone());
         existingCustomer.setEmail(customerRequestObj.getEmail());
         existingCustomer.setName(customerRequestObj.getName());
-        existingCustomer.setDayPhone(customerRequestObj.getDayPhone());
-        existingCustomer.setEvePhone(customerRequestObj.getEvePhone());
         existingCustomer.setMobPhone(customerRequestObj.getMobPhone());
         return customerRepository.save(existingCustomer);
     }
 
     public Customer updateCustomerAddress(Customer existingCustomer, CustomerRequestObj customerRequestObj) throws UserException {
-        isShippingRegionIdValid(customerRequestObj.getShippingRegionId());
         existingCustomer.setAddress1(Objects.nonNull(customerRequestObj.getAddress1()) ? customerRequestObj.getAddress1() : existingCustomer.getAddress1());
         existingCustomer.setAddress2(Objects.nonNull(customerRequestObj.getAddress2()) ? customerRequestObj.getAddress2() : existingCustomer.getAddress2());
         existingCustomer.setCity(Objects.nonNull(customerRequestObj.getCity()) ? customerRequestObj.getCity() : existingCustomer.getCity());
         existingCustomer.setRegion(Objects.nonNull(customerRequestObj.getRegion()) ? customerRequestObj.getRegion() : existingCustomer.getRegion());
         existingCustomer.setPostalCode(Objects.nonNull(customerRequestObj.getPostalCode()) ? customerRequestObj.getPostalCode() : existingCustomer.getPostalCode());
-        existingCustomer.setShippingRegion(shippingRegionRepository.findById(customerRequestObj.getShippingRegionId())
-                .orElseThrow(()-> new UserException(Constants.USR_09_CODE, HttpStatus.NOT_ACCEPTABLE.value(), Constants.USR_09_MESSAGE, "shippingId")));
         return customerRepository.save(existingCustomer);
     }
 

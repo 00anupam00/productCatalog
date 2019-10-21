@@ -23,6 +23,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -81,8 +82,7 @@ public class CustomerControllerTest extends TestDataUtil {
                 .andDo(MockMvcResultHandlers.print());
     }
 
-    //Negative test scenario for null password.
-    @Test(expected = NestedServletException.class)
+    @Test
     public void login() throws Exception{
         Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().getCustomer());
         Mockito.when(customerRepository.findByEmail(Mockito.anyString())).thenReturn(getCustomerResponseObj().getCustomer());
@@ -92,11 +92,6 @@ public class CustomerControllerTest extends TestDataUtil {
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    @Ignore
-    public void facebookLogin() {
     }
 
     @Test

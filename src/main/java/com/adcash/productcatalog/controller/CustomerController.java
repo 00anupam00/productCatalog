@@ -58,24 +58,6 @@ public class CustomerController extends TokenValidator {
     }
 
     /**
-     * This endpoint allows a user to login to the application using facebook.
-     * @param request
-     * @param accessTokenObj
-     * @return
-     * @throws AuthenticationException
-     * @throws UserException
-     */
-    @PostMapping("/customers/facebook")
-    public ResponseEntity<CustomerResponseObj> facebookLogin(HttpServletRequest request, @RequestBody Map<String, String> accessTokenObj) throws AuthenticationException, UserException {
-        isTokenValid(request.getHeader(Constants.HEADER_STRING));
-        String accessToken= accessTokenObj.getOrDefault("access_token", "");
-        //TODO Facebook Login
-
-        CustomerResponseObj customerResponseObj= new CustomerResponseObj();
-        return ResponseEntity.ok(customerResponseObj);
-    }
-
-    /**
      * This endpoint retrieves customer information using the customer id in the token provided in the header of the request.
      * @param request
      * @return

@@ -1,112 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="82ab7fde-ff67-4023-ad66-f5fd90bcc801" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/dump.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/dump.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/MyappApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/MyappApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/ServletInitializer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/configuration/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/configuration/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/configuration/JwtAuthorizationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/configuration/JwtAuthorizationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/configuration/WebSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/configuration/WebSecurity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/controller/AttributeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/controller/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/controller/CustomErrorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/controller/CustomErrorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/controller/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/controller/DepartmentController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/controller/OrderController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/controller/ShippingController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/controller/ShoppingCartController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/controller/StripeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/controller/TaxController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/Attribute.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/AttributeValue.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/Audit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dao/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dao/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/Department.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/OrderDetail.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/Orders.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dao/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/ProductAttribute.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/ProductAttributeId.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/ProductCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dao/ProductCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/ProductCategoryId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dao/ProductCategoryId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/Review.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/Shipping.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/ShippingRegion.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/ShoppingCart.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dao/Tax.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/AttributeResponseObj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/CartRequestObj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/CartResponseObj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/CategoryResponseObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dto/CategoryResponseObj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/CustomerRequestObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dto/CustomerRequestObj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/CustomerResponseObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dto/CustomerResponseObj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/DepartmentResponseObj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/ErrorResponseObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dto/ErrorResponseObj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/OrderRequestObj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/OrderResponseObj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/PaginationMetadata.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/ResponseObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dto/ResponseObj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/ReviewObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dto/ReviewObj.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/SearchObj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/ShippingResponseObj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/StripePaymentObj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/StripeRequestObj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/StripeResponseObj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/dto/TaxResponseObj.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/exceptions/AuthenticationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/exceptions/AuthenticationException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/exceptions/CategoryException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/exceptions/CategoryException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/exceptions/DepartmentException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/exceptions/DepartmentException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/exceptions/PaginationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/exceptions/PaginationException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/exceptions/UserException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/exceptions/UserException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/repository/AttributeRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/repository/AttributeValueRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/repository/CartRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/repository/CategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/repository/CustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/repository/CustomerRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/repository/DepartmentRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/repository/OrderDetailRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/repository/OrdersRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/repository/ReviewRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/repository/ShippingRegionRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/repository/ShippingRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/repository/TaxRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/service/AttributeService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/service/CartService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/service/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/service/CustomerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/service/DepartmentService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/service/OrderService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/service/ShippingService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/service/StripeService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/service/TaxService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/util/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/util/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/util/JwtTokenUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/util/JwtTokenUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/util/TokenValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/util/TokenValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/turingapp/myapp/util/Validators.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/util/Validators.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changelog/setup/initialSetup" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/setup/initialSetup" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/hello.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/turingapp/myapp/MyappApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/MyappApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/turingapp/myapp/TestDataUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/TestDataUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/turingapp/myapp/controller/AttributeControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/turingapp/myapp/controller/CategoryControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/controller/CategoryControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/turingapp/myapp/controller/CustomerControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/controller/CustomerControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/turingapp/myapp/controller/DepartmentControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/turingapp/myapp/controller/OrderControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/turingapp/myapp/controller/ProductControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/controller/ProductControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/turingapp/myapp/controller/ShippingControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/turingapp/myapp/controller/ShoppingCartControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/turingapp/myapp/controller/TaxControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/turingapp/myapp/exceptions/CustomErrorControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/exceptions/CustomErrorControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/turing-entrypoint.sh" beforeDir="false" />
+    <list default="true" id="c9aa27bb-8248-46c9-96e8-8dbbbfd9ae33" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/MyappApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/MyappApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/configuration/WebSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/configuration/WebSecurity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/controller/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/controller/CustomErrorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/controller/CustomErrorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dao/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dao/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dao/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dao/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dto/CustomerRequestObj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/dto/CustomerRequestObj.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/repository/CategoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/service/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/TestDataUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/TestDataUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/controller/CategoryControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/controller/CategoryControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/controller/CustomerControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/controller/CustomerControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/controller/ProductControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/adcash/productcatalog/controller/ProductControllerTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -117,13 +31,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1SWDSCmSHda8gLYmbJoLn3AaUDa" />
+  <component name="ProjectId" id="1SWMjSaxxl9mo7PnKZ7jQfI33lL" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/exceptions" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\anraks\Documents\AdCash\productCatalog\src\main\java\com\adcash\productcatalog\exceptions" />
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.adcash.productcatalog" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -138,16 +53,104 @@
       </list>
     </option>
   </component>
+  <component name="RunManager" selected="JUnit.CustomerControllerTest.login">
+    <configuration name="CategoryControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="projectCatalog" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.adcash.productcatalog.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.adcash.productcatalog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.adcash.productcatalog.controller.CategoryControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CategoryControllerTest.getAllCategories" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="projectCatalog" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.adcash.productcatalog.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.adcash.productcatalog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.adcash.productcatalog.controller.CategoryControllerTest" />
+      <option name="METHOD_NAME" value="getAllCategories" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomerControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="projectCatalog" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.adcash.productcatalog.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.adcash.productcatalog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.adcash.productcatalog.controller.CustomerControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomerControllerTest.login" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="projectCatalog" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.adcash.productcatalog.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.adcash.productcatalog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.adcash.productcatalog.controller.CustomerControllerTest" />
+      <option name="METHOD_NAME" value="login" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="projectCatalog" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.adcash.productcatalog.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.adcash.productcatalog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.adcash.productcatalog.controller.ProductControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.CustomerControllerTest.login" />
+        <item itemvalue="JUnit.CustomerControllerTest" />
+        <item itemvalue="JUnit.CategoryControllerTest" />
+        <item itemvalue="JUnit.ProductControllerTest" />
+        <item itemvalue="JUnit.CategoryControllerTest.getAllCategories" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="82ab7fde-ff67-4023-ad66-f5fd90bcc801" name="Default Changelist" comment="" />
-      <created>1571670455745</created>
+      <changelist id="c9aa27bb-8248-46c9-96e8-8dbbbfd9ae33" name="Default Changelist" comment="" />
+      <created>1571675032436</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1571670455745</updated>
+      <updated>1571675032436</updated>
     </task>
     <servers />
   </component>
@@ -161,5 +164,36 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/service/CustomerService.java</url>
+          <line>92</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/controller/CustomerController.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/configuration/JwtAuthenticationFilter.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/configuration/WebSecurity.java</url>
+          <line>62</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/adcash/productcatalog/configuration/WebSecurity.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
