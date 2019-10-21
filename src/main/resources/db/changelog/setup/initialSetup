@@ -1,0 +1,12 @@
+changeSet:
+  id: Product Catalog app
+  author: Anupam Rakshit<rakshit.anupam@hotmail.com>
+  changes:
+    - sqlFile:
+        dbms: sql
+        encoding: utf8
+        endDelimiter: \nGO
+        path: database/dump.sql
+        relativeToChangelogFile: true
+        splitStatements: true
+        stripComments: true
