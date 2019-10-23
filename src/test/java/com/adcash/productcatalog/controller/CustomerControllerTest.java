@@ -90,7 +90,7 @@ public class CustomerControllerTest extends TestDataUtil {
         Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().get(0).getCustomer());
         mockClient.perform(MockMvcRequestBuilders
                 .post("/customers")
-                .content(objectMapper.writeValueAsString(getCustomerRequestObj()))
+                .content(objectMapper.writeValueAsString(getCustomerRequestObj().get(0)))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.customer.customerId").exists())
@@ -104,7 +104,7 @@ public class CustomerControllerTest extends TestDataUtil {
         Mockito.when(customerRepository.findByEmail(Mockito.anyString())).thenReturn(getCustomerResponseObj().get(0).getCustomer());
         mockClient.perform(MockMvcRequestBuilders
                 .post("/customers/login")
-                .content(objectMapper.writeValueAsString(getCustomerRequestObj()))
+                .content(objectMapper.writeValueAsString(getCustomerRequestObj().get(0)))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(MockMvcResultHandlers.print());
@@ -152,7 +152,7 @@ public class CustomerControllerTest extends TestDataUtil {
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8)
                 .header(Constants.HEADER_STRING,this.admin_token)
-                .content(objectMapper.writeValueAsString(getCustomerRequestObj())))
+                .content(objectMapper.writeValueAsString(getCustomerRequestObj().get(1))))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.creditCard").value(Matchers.notNullValue()))
                 .andDo(MockMvcResultHandlers.print());

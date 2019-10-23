@@ -151,4 +151,22 @@ public abstract class TestDataUtil {
 
         return productRequestObjs;
     }
+
+    protected List<CategoryRequestObj> getCategoryRequestObj(){
+        List<CategoryRequestObj> categoryRequestObjs= new ArrayList<>();
+        CategoryRequestObj categoryRequestObj= new CategoryRequestObj();
+        categoryRequestObj.setDescription("Category Description 1");
+        categoryRequestObj.setName("Category 1");
+        categoryRequestObj.setProductIds(Arrays.asList(getProductResponseList().get(0).getProductId()));
+        categoryRequestObjs.add(categoryRequestObj);
+
+        CategoryRequestObj categoryRequestObj1= new CategoryRequestObj();
+        categoryRequestObj1.setDescription("Category Description 2");
+        categoryRequestObj1.setName("Category 2");
+        categoryRequestObj1.setProductIds(Arrays.asList(getProductResponseList().get(1).getProductId()));
+        categoryRequestObjs.add(categoryRequestObj1);
+        return categoryRequestObjs;
+    }
+
+
 }
