@@ -56,4 +56,7 @@ public class Customer implements Serializable {
     @Column(name = "mob_phone", length = 100)
     private String mobPhone;
 
+    @Column(name = "authorities", columnDefinition = "LONGTEXT")
+    private String authorities;
+
 }

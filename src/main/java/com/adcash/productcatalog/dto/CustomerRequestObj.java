@@ -11,6 +11,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Getter @Setter
 @NoArgsConstructor @ToString
@@ -33,4 +34,5 @@ public class CustomerRequestObj implements Serializable {
     private String postalCode;
     private String country;
     private String mobPhone;
+    private List<String> authorities;
 }

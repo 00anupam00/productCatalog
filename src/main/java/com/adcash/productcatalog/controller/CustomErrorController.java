@@ -21,16 +21,8 @@ public class CustomErrorController{
         return ResponseEntity.status(errorResponse.getStatus()).body(error);
     }
 
-    @ExceptionHandler(value = PaginationException.class)
-    public ResponseEntity<Map<String, ErrorResponseObj>> pagException(PaginationException ex){
-        ErrorResponseObj errorResponse= new ErrorResponseObj(ex.getCode(), HttpStatus.valueOf(ex.getStatus()), ex.getMessage(), ex.getField());
-        Map<String, ErrorResponseObj> error= new HashMap<>();
-        error.put("error", errorResponse);
-        return ResponseEntity.status(errorResponse.getStatus()).body(error);
-    }
-
     @ExceptionHandler(value = UserException.class)
-    public ResponseEntity<Map<String, ErrorResponseObj>> pagException(UserException ex){
+    public ResponseEntity<Map<String, ErrorResponseObj>> userException(UserException ex){
         ErrorResponseObj errorResponse= new ErrorResponseObj(ex.getCode(), HttpStatus.valueOf(ex.getStatus()), ex.getMessage(), ex.getField());
         Map<String, ErrorResponseObj> error= new HashMap<>();
         error.put("error", errorResponse);
@@ -45,8 +37,8 @@ public class CustomErrorController{
         return ResponseEntity.status(errorResponse.getStatus()).body(error);
     }
 
-    @ExceptionHandler(value = DepartmentException.class)
-    public ResponseEntity<Map<String, ErrorResponseObj>> deptException(DepartmentException ex){
+    @ExceptionHandler(value = ProductException.class)
+    public ResponseEntity<Map<String, ErrorResponseObj>> prodException(ProductException ex){
         ErrorResponseObj errorResponse= new ErrorResponseObj(ex.getCode(), HttpStatus.valueOf(ex.getStatus()), ex.getMessage(), ex.getField());
         Map<String, ErrorResponseObj> error= new HashMap<>();
         error.put("error", errorResponse);

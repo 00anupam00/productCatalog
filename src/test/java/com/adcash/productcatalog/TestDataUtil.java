@@ -2,32 +2,61 @@ package com.adcash.productcatalog;
 
 import com.adcash.productcatalog.dao.*;
 import com.adcash.productcatalog.dto.*;
+import com.adcash.productcatalog.util.Constants;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.*;
 
 public abstract class TestDataUtil {
 
-    protected CustomerRequestObj getCustomerRequestObj(){
+    protected List<CustomerRequestObj> getCustomerRequestObj(){
+        List<CustomerRequestObj> customerRequestObjs= new ArrayList<>();
+
         CustomerRequestObj customerRequestObj= new CustomerRequestObj();
         customerRequestObj.setName("Anupam");
         customerRequestObj.setPassword("12345pwd");
         customerRequestObj.setEmail("anupam@gmail.com");
         customerRequestObj.setAddress1("Estonia");
         customerRequestObj.setCreditCard(new StringBuilder("xxxx-xxxx-xxxx-xxxx"));
-        return customerRequestObj;
+        customerRequestObj.setAuthorities(Arrays.asList(Constants.Roles.ADMIN.name()));
+        customerRequestObjs.add(customerRequestObj);
+
+        CustomerRequestObj customerRequestObj1= new CustomerRequestObj();
+        customerRequestObj1.setName("Anupam");
+        customerRequestObj1.setPassword("12345pwd");
+        customerRequestObj1.setEmail("anupam12@gmail.com");
+        customerRequestObj1.setAddress1("Estonia");
+        customerRequestObj1.setCreditCard(new StringBuilder("xxxx-xxxx-xxxx-xxxx"));
+        customerRequestObj1.setAuthorities(Arrays.asList(Constants.Roles.USER.name()));
+        customerRequestObjs.add(customerRequestObj1);
+
+        return customerRequestObjs;
     }
 
-    protected CustomerResponseObj getCustomerResponseObj(){
+    protected List<CustomerResponseObj> getCustomerResponseObj(){
+        List<CustomerResponseObj> customerResponseObjs= new ArrayList<>();
         Customer customer= new Customer();
         customer.setCustomerId(1);
         customer.setName("Anupam");
         customer.setEmail("anupam@gmail.com");
         customer.setPassword("12345pwd");
         customer.setAddress1("Estonia");
+        customer.setAuthorities(Constants.Roles.ADMIN.name());
         CustomerResponseObj customerRequestObj= new CustomerResponseObj();
         customerRequestObj.setCustomer(customer);
-        return customerRequestObj;
+        customerResponseObjs.add(customerRequestObj);
+
+        Customer customer1= new Customer();
+        customer1.setCustomerId(1);
+        customer1.setName("Anupam");
+        customer1.setEmail("anupam12@gmail.com");
+        customer1.setPassword("12345pwd");
+        customer1.setAddress1("Estonia");
+        customer1.setAuthorities(Constants.Roles.USER.name());
+        CustomerResponseObj customerRequestObj1= new CustomerResponseObj();
+        customerRequestObj1.setCustomer(customer1);
+        customerResponseObjs.add(customerRequestObj1);
+        return customerResponseObjs;
     }
 
     protected CustomerRequestObj getUpdateCustomerPaylod(){
@@ -87,7 +116,6 @@ public abstract class TestDataUtil {
         product1.setDescription("Product Description1");
         product1.setDiscountedPrice(1034.2);
         product1.setPrice(2014.2);
-        product1.setThumbnail("blah blah blah...");
 
         Product product2 = new Product();
         product2.setProductId(2);
@@ -95,10 +123,32 @@ public abstract class TestDataUtil {
         product2.setDescription("Product Description2");
         product2.setDiscountedPrice(104.2);
         product2.setPrice(204.2);
-        product2.setThumbnail("blah blah blah...");
 
         products.add(product1);
         products.add(product2);
         return products;
+    }
+
+    protected List<ProductRequestObj> getProductRequestDataList(){
+        List<ProductRequestObj> productRequestObjs= new ArrayList<>();
+        ProductRequestObj product1 = new ProductRequestObj();
+        product1.setProductId(1);
+        product1.setName("Product Name1");
+        product1.setDescription("Product Description1");
+        product1.setDiscountedPrice(1034.2);
+        product1.setPrice(2014.2);
+        product1.setCategoryId(1);
+        productRequestObjs.add(product1);
+
+        ProductRequestObj product2 = new ProductRequestObj();
+        product2.setProductId(1);
+        product2.setName("Product Name1");
+        product2.setDescription("Product Description1");
+        product2.setDiscountedPrice(1034.2);
+        product2.setPrice(2014.2);
+        product2.setCategoryId(1);
+        productRequestObjs.add(product2);
+
+        return productRequestObjs;
     }
 }

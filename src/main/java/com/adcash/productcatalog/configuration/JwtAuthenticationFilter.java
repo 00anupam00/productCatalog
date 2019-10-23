@@ -11,6 +11,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
@@ -19,6 +21,8 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -37,14 +41,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
-           int customerId= jwtTokenUtil.getCustomerIdFromKey(request.getHeader(Constants.HEADER_STRING).split(" ")[1]);
-           Customer customer= customerService.findById(customerId)
-                   .orElseThrow(() -> new UsernameNotFoundException("The customer with id: "+customerId+", could not be found."));
+            String email= jwtTokenUtil.getCustomerEmailFromKey(request.getHeader(Constants.HEADER_STRING).split(" ")[1]);
+            Customer customer= customerService.findByEmail(email)
+                        .orElseThrow(() -> new UsernameNotFoundException("The customer with id: "+email+", could not be found."));
+            List<GrantedAuthority> authorities= jwtTokenUtil.getAuthoritiesList(customer.getAuthorities());
            return authenticationManager.authenticate(
                    new UsernamePasswordAuthenticationToken(
                            customer.getCustomerId(),
                            customer.getPassword(),
-                           new ArrayList<>()
+                           authorities
                    )
            );
         } catch (UsernameNotFoundException e) {
@@ -56,7 +61,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain, Authentication authResult) {
         String token= jwtTokenUtil
-                .generateToken(((CustomerRequestObj)authResult.getPrincipal()).getCustomerId());
+                .generateToken(((CustomerRequestObj)authResult.getPrincipal()).getEmail());
         response.setHeader(Constants.HEADER_STRING,Constants.TOKEN_PREFIX + token);
     }
 }

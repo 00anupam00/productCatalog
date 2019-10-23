@@ -4,10 +4,13 @@ import com.adcash.productcatalog.dao.Customer;
 import com.adcash.productcatalog.service.CustomerService;
 import com.adcash.productcatalog.util.Constants;
 import com.adcash.productcatalog.util.JwtTokenUtil;
+import liquibase.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -22,6 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
@@ -54,6 +59,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest req){
+
         String token = req.getHeader(Constants.HEADER_STRING).split(" ")[1];
             ServletContext context= req.getServletContext();
             WebApplicationContext webApplicationContext= WebApplicationContextUtils.getWebApplicationContext(context);
@@ -61,14 +67,17 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             this.customerService= webApplicationContext.getBean(CustomerService.class);
         if (token != null) {
             // parse the token.
-            int user_id = jwtTokenUtil.getCustomerIdFromKey(token);
-            Customer customer= customerService.findById(user_id)
-                    .orElseThrow(() -> new UsernameNotFoundException("The customer with id: "+user_id+", could not be found."));
-            if (user_id != 0) {
+            String email = jwtTokenUtil.getCustomerEmailFromKey(token);
+            Customer customer= customerService.findByEmail(email)
+                    .orElseThrow(() -> new UsernameNotFoundException("The customer with email: "+email+", could not be found."));
+
+            List<GrantedAuthority> authorities= jwtTokenUtil.getAuthoritiesList(customer.getAuthorities());
+
+            if (!StringUtils.isEmpty(email)) {
                 return new UsernamePasswordAuthenticationToken(
                         customer.getCustomerId(),
                         customer.getPassword(),
-                        new ArrayList<>()
+                        authorities
                 );
             }
             return null;

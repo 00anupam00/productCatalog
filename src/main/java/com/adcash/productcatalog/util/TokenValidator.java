@@ -19,11 +19,11 @@ public abstract class TokenValidator {
 
     public Customer isTokenValid(String token) throws AuthenticationException, UserException {
         Customer customer;
-        int userId= jwtTokenUtil.getCustomerIdFromKey(token);
+        String email= jwtTokenUtil.getCustomerEmailFromKey(token);
         if(!jwtTokenUtil.isTokenValid(token)){
             throw new AuthenticationException(Constants.AUT_01_CODE, HttpStatus.UNAUTHORIZED.value(), Constants.AUT_01_MESSAGE, "token");
         }
-        customer= customerService.findById(userId)
+        customer= customerService.findByEmail(email)
                 .orElseThrow(() -> new UserException(Constants.AUT_02_CODE, HttpStatus.UNAUTHORIZED.value(), Constants.AUT_02_MESSAGE, "customerId"));
         return customer;
     }

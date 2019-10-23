@@ -30,15 +30,6 @@ public class Product {
     @Column(name = "discounted_price", scale = 10, precision = 2)
     @NotNull
     private double discountedPrice=0.0;
-    @Column(length = 150)
-    private String image;
-    @Column(length = 150)
-    private String image_2;
-    @Column(length = 150)
-    private String thumbnail;
-    @Column(length = 6)
-    @NotNull
-    private int display=0;
 
     @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JsonIgnoreProperties("products")

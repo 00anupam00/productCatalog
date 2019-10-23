@@ -45,15 +45,4 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.findById(category_id));
     }
 
-    /**
-     * This endpoint returns the category of a particular product.
-     * @param product_id
-     * @return
-     * @throws CategoryException
-     */
-    @GetMapping("/categories/inProduct/{product_id}")
-    public ResponseEntity<CategoryResponseObj> getAllCategoriesInProduct(@PathVariable int product_id) throws CategoryException {
-        log.info("Finding a Category by product id: {}", product_id);
-        return ResponseEntity.ok(categoryService.findByProduct(product_id));
-    }
 }

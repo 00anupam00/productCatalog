@@ -9,20 +9,28 @@ import com.adcash.productcatalog.util.Validators;
 import com.adcash.productcatalog.exceptions.UserException;
 import com.adcash.productcatalog.repository.CustomerRepository;
 import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.Transactional;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
-public class CustomerService extends Validators {
+public class CustomerService extends Validators implements UserDetailsService {
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -33,6 +41,8 @@ public class CustomerService extends Validators {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
+    private Logger log= LoggerFactory.getLogger(this.getClass());
 
     @PostConstruct
     private void setUp(){
@@ -47,13 +57,18 @@ public class CustomerService extends Validators {
         isPasswordValid(customerRequestObj.getPassword());
         validateName(customerRequestObj.getName());
         Customer customer = new Customer();
+        if(Objects.isNull(customerRequestObj.getAuthorities())){
+            customer.setAuthorities(Constants.Roles.USER.name());
+        }else{
+            customer.setAuthorities(customerRequestObj.getAuthorities().toString());
+        }
         customer.setName(customerRequestObj.getName());
         customer.setEmail(customerRequestObj.getEmail());
         customer.setPassword(customerRequestObj.getPassword());
 
         Customer savedCustomer= customerRepository.save(customer);
 
-        String token= jwtTokenUtil.generateToken(savedCustomer.getCustomerId());
+        String token= jwtTokenUtil.generateToken(savedCustomer.getEmail());
         CustomerResponseObj customerResponseObj= new CustomerResponseObj();
         customerResponseObj.setCustomer(savedCustomer);
         customerResponseObj.setAccessToken(token);
@@ -63,6 +78,10 @@ public class CustomerService extends Validators {
 
     public Optional<Customer> findById(int customerId){
         return customerRepository.findById(customerId);
+    }
+
+    public Optional<Customer> findByEmail(String email){
+        return Optional.ofNullable(customerRepository.findByEmail(email));
     }
 
     public Customer update(Customer existingCustomer, CustomerRequestObj customerRequestObj) throws UserException {
@@ -100,7 +119,15 @@ public class CustomerService extends Validators {
         if(!customerRequestObj.getPassword().equals(customer.getPassword())){
             throw new UserException(Constants.USR_01_CODE, HttpStatus.UNAUTHORIZED.value(), Constants.USR_01_MESSAGE, "Email|Password");
         }
-        String token= jwtTokenUtil.generateToken(customer.getCustomerId());
+        if(Objects.isNull(customer.getAuthorities())){
+            throw new UserException(Constants.AUT_01_CODE, HttpStatus.UNAUTHORIZED.value(), Constants.AUT_01_MESSAGE, "Authority");
+        }
+        List<GrantedAuthority> authorities= jwtTokenUtil.getAuthoritiesList(customer.getAuthorities());
+        if(authorities.contains(new SimpleGrantedAuthority(Constants.Roles.ADMIN.name()))
+                || authorities.contains(new SimpleGrantedAuthority(Constants.Roles.USER.name()))){
+            throw new UserException(Constants.AUT_01_CODE, HttpStatus.UNAUTHORIZED.value(), Constants.AUT_01_MESSAGE, "Authority");
+        }
+        String token= jwtTokenUtil.generateToken(customer.getEmail());
         CustomerResponseObj customerResponseObj= new CustomerResponseObj();
         customerResponseObj.setCustomer(customer);
         customerResponseObj.setAccessToken(token);
@@ -113,5 +140,17 @@ public class CustomerService extends Validators {
         if(Objects.nonNull(customer)){
             throw new UserException(Constants.USR_04_CODE, HttpStatus.CONFLICT.value(), Constants.USR_04_MESSAGE, "Email");
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        Customer customer= customerRepository.findByEmail(s);
+        if(Objects.isNull(customer)){
+            throw new UsernameNotFoundException("No username found with the mentioned email.");
+        }
+        return new User(
+                customer.getEmail(),
+                new BCryptPasswordEncoder().encode(customer.getPassword()),
+                jwtTokenUtil.getAuthoritiesList(customer.getAuthorities()));
     }
 }

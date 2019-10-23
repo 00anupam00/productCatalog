@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -34,36 +34,30 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, Constants.SAVE_CUSTOMERS).permitAll()
                 .antMatchers(HttpMethod.POST, Constants.LOGIN_CUSTOMERS).permitAll()
-                .antMatchers(HttpMethod.GET, Constants.GET_ALL_TAXES).permitAll()
-                .antMatchers(HttpMethod.GET, Constants.GET_TAX).permitAll()
-                .antMatchers(HttpMethod.GET, Constants.ALL_SHIPPING_REGIONS).permitAll()
-                .antMatchers(HttpMethod.GET, Constants.SHIPPING_REGION).permitAll()
                 .antMatchers(HttpMethod.GET, Constants.PRODUCTS_API).permitAll()
                 .antMatchers(HttpMethod.GET, Constants.ALL_PRODUCTS_API).permitAll()
-                .antMatchers(HttpMethod.GET, Constants.DEPARTMENTS_API).permitAll()
-                .antMatchers(HttpMethod.GET, Constants.ALL_DEPARTMENTS_API).permitAll()
                 .antMatchers(HttpMethod.GET, Constants.CATEGORY_API).permitAll()
                 .antMatchers(HttpMethod.GET, Constants.ALL_CATEGORY_API).permitAll()
-                .antMatchers(HttpMethod.GET, Constants.ATTRIBUTES_API).permitAll()
-                .antMatchers(HttpMethod.GET, Constants.ALL_ATTRIBUTES_API).permitAll()
+                .anyRequest().authenticated()
+                .antMatchers(HttpMethod.POST, Constants.CATEGORY_API).hasRole(Constants.Roles.ADMIN.name())
+                .antMatchers(HttpMethod.POST, Constants.PRODUCTS_API).hasRole(Constants.Roles.ADMIN.name())
+                .antMatchers(HttpMethod.DELETE, Constants.PRODUCTS_API).hasRole(Constants.Roles.ADMIN.name())
+                .antMatchers(HttpMethod.PUT, Constants.PRODUCTS_API).hasRole(Constants.Roles.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager()))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
-        .formLogin()
-        .loginPage("/customers/login")
-        .defaultSuccessUrl("/products")
-        .permitAll();
+        .formLogin().disable();
+        //.loginPage("/customers/login")
+        //.defaultSuccessUrl("/products")
+        //.permitAll();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("Anupam")
-                .password(new BCryptPasswordEncoder().encode("12345pwd"))
-                .authorities("ROLE_USER");
+        auth.userDetailsService(customerService);
     }
 
     @Bean

@@ -7,8 +7,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Getter
-public class PaginationException extends Exception{
-
+public class ProductException extends Exception {
     private static final long serialUID= 1L;
 
     private String code;

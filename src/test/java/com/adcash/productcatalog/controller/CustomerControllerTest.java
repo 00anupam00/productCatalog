@@ -51,14 +51,16 @@ public class CustomerControllerTest extends TestDataUtil {
     private CustomerRepository customerRepository;
     @MockBean
     Session session;
-    private String token;
+    private String user_token;
+    private String admin_token;
 
     @Before
     public void setUp() throws Exception {
-        Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().getCustomer());
+        //For USER users.
+        Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().get(1).getCustomer());
         String result= mockClient.perform(MockMvcRequestBuilders
                 .post("/customers")
-                .content(objectMapper.writeValueAsString(getCustomerRequestObj()))
+                .content(objectMapper.writeValueAsString(getCustomerRequestObj().get(1)))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.customer.customerId").exists())
@@ -66,12 +68,26 @@ public class CustomerControllerTest extends TestDataUtil {
                 .andReturn().getResponse()
                 .getContentAsString();
         CustomerResponseObj responseObj= objectMapper.readValue(result, CustomerResponseObj.class);
-        this.token = StringUtils.isNotEmpty(this.token) ? this.token : responseObj.getAccessToken();
+        this.user_token = StringUtils.isNotEmpty(this.user_token) ? this.user_token : responseObj.getAccessToken();
+
+        //For ADMIN users.
+        Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().get(0).getCustomer());
+        String admin_result= mockClient.perform(MockMvcRequestBuilders
+                .post("/customers")
+                .content(objectMapper.writeValueAsString(getCustomerRequestObj().get(0)))
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.customer.customerId").exists())
+                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+                .andReturn().getResponse()
+                .getContentAsString();
+        CustomerResponseObj responseObjA= objectMapper.readValue(admin_result, CustomerResponseObj.class);
+        this.admin_token = StringUtils.isNotEmpty(this.admin_token) ? this.admin_token : responseObjA.getAccessToken();
     }
 
     @Test
     public void create() throws Exception {
-        Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().getCustomer());
+        Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().get(0).getCustomer());
         mockClient.perform(MockMvcRequestBuilders
                 .post("/customers")
                 .content(objectMapper.writeValueAsString(getCustomerRequestObj()))
@@ -84,8 +100,8 @@ public class CustomerControllerTest extends TestDataUtil {
 
     @Test
     public void login() throws Exception{
-        Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().getCustomer());
-        Mockito.when(customerRepository.findByEmail(Mockito.anyString())).thenReturn(getCustomerResponseObj().getCustomer());
+        Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().get(0).getCustomer());
+        Mockito.when(customerRepository.findByEmail(Mockito.anyString())).thenReturn(getCustomerResponseObj().get(0).getCustomer());
         mockClient.perform(MockMvcRequestBuilders
                 .post("/customers/login")
                 .content(objectMapper.writeValueAsString(getCustomerRequestObj()))
@@ -97,13 +113,14 @@ public class CustomerControllerTest extends TestDataUtil {
     @Test
     public void findCustomerById() throws Exception {
 
-        Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().getCustomer());
-        Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
+        Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().get(0).getCustomer());
+        Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().get(0).getCustomer()));
+        Mockito.when(customerRepository.findByEmail(Mockito.anyString())).thenReturn(getCustomerResponseObj().get(0).getCustomer());
         mockClient.perform(MockMvcRequestBuilders
         .get("/customers")
         .contentType(MediaType.APPLICATION_JSON_UTF8)
         .accept(MediaType.APPLICATION_JSON_UTF8)
-        .header(Constants.HEADER_STRING,this.token))
+        .header(Constants.HEADER_STRING,this.admin_token))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name", Matchers.notNullValue()))
         .andDo(MockMvcResultHandlers.print());
@@ -113,13 +130,13 @@ public class CustomerControllerTest extends TestDataUtil {
     public void updateCustomer() throws Exception {
 
         Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getUpdatedCustomerResponseObj().getCustomer());
-        Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
-        Mockito.when(session.load(Customer.class,1)).thenReturn(getCustomerResponseObj().getCustomer());
+        Mockito.when(session.load(Customer.class,1)).thenReturn(getCustomerResponseObj().get(0).getCustomer());
+        Mockito.when(customerRepository.findByEmail(Mockito.anyString())).thenReturn(getCustomerResponseObj().get(0).getCustomer());
         mockClient.perform(MockMvcRequestBuilders
                 .put("/customer")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8)
-                .header(Constants.HEADER_STRING,this.token)
+                .header(Constants.HEADER_STRING,this.admin_token)
                 .content(objectMapper.writeValueAsString(getUpdateCustomerPaylod())))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Anupam Rakshit"))
@@ -129,12 +146,12 @@ public class CustomerControllerTest extends TestDataUtil {
     @Test
     public void updateCreditCard() throws Exception {
         Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getUpdatedCCResponseObj().getCustomer());
-        Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
+        Mockito.when(customerRepository.findByEmail(Mockito.anyString())).thenReturn(getCustomerResponseObj().get(0).getCustomer());
         mockClient.perform(MockMvcRequestBuilders
                 .put("/customer/creditCard")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8)
-                .header(Constants.HEADER_STRING,this.token)
+                .header(Constants.HEADER_STRING,this.admin_token)
                 .content(objectMapper.writeValueAsString(getCustomerRequestObj())))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.creditCard").value(Matchers.notNullValue()))

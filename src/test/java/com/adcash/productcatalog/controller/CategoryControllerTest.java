@@ -51,14 +51,16 @@ public class CategoryControllerTest extends TestDataUtil {
     @MockBean
     CategoryRepository categoryRepository;
 
-    private String token;
+    private String user_token;
+    private String admin_token;
 
     @Before
     public void setUp() throws Exception {
-        Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().getCustomer());
+        //For USER users.
+        Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().get(1).getCustomer());
         String result= mockClient.perform(MockMvcRequestBuilders
                 .post("/customers")
-                .content(objectMapper.writeValueAsString(getCustomerRequestObj()))
+                .content(objectMapper.writeValueAsString(getCustomerRequestObj().get(1)))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.customer.customerId").exists())
@@ -66,19 +68,33 @@ public class CategoryControllerTest extends TestDataUtil {
                 .andReturn().getResponse()
                 .getContentAsString();
         CustomerResponseObj responseObj= objectMapper.readValue(result, CustomerResponseObj.class);
-        this.token = StringUtils.isNotEmpty(this.token) ? this.token : responseObj.getAccessToken();
+        this.user_token = StringUtils.isNotEmpty(this.user_token) ? this.user_token : responseObj.getAccessToken();
+
+        //For ADMIN users.
+        Mockito.when(customerRepository.save(Mockito.any(Customer.class))).thenReturn(getCustomerResponseObj().get(0).getCustomer());
+        String admin_result= mockClient.perform(MockMvcRequestBuilders
+                .post("/customers")
+                .content(objectMapper.writeValueAsString(getCustomerRequestObj().get(0)))
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.customer.customerId").exists())
+                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+                .andReturn().getResponse()
+                .getContentAsString();
+        CustomerResponseObj responseObjA= objectMapper.readValue(admin_result, CustomerResponseObj.class);
+        this.admin_token = StringUtils.isNotEmpty(this.admin_token) ? this.admin_token : responseObjA.getAccessToken();
     }
 
     @Test
     public void getAllCategories() throws Exception {
         Mockito.when(categoryRepository.findAll()).thenReturn(getCategoryList());
-        Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
+        Mockito.when(customerRepository.findByEmail(Mockito.anyString())).thenReturn(getCustomerResponseObj().get(0).getCustomer());
         mockClient.perform(
                 MockMvcRequestBuilders
                         .get("/categories")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .accept(MediaType.APPLICATION_JSON_UTF8)
-                        .header(Constants.HEADER_STRING, this.token))
+                        .header(Constants.HEADER_STRING, this.admin_token))
                 .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0].category_id").value(1))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
@@ -87,30 +103,15 @@ public class CategoryControllerTest extends TestDataUtil {
 
     @Test
     public void getCategory() throws Exception {
-        Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
+        Mockito.when(customerRepository.findByEmail(Mockito.anyString())).thenReturn(getCustomerResponseObj().get(0).getCustomer());
         Mockito.when(categoryRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCategoryData()));
         mockClient.perform(
                 MockMvcRequestBuilders
                         .get("/categories/2")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .accept(MediaType.APPLICATION_JSON_UTF8)
-                        .header(Constants.HEADER_STRING, this.token))
+                        .header(Constants.HEADER_STRING, this.admin_token))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Category 2"))
-                .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    public void getAllCategoriesInProduct() throws Exception {
-        Mockito.when(customerRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(getCustomerResponseObj().getCustomer()));
-        Mockito.when(categoryRepository.findByProducts(Mockito.anyInt())).thenReturn(Optional.of(getCategoryList().get(0)));
-        mockClient.perform(
-                MockMvcRequestBuilders
-                        .get("/categories/inProduct/1")
-                        .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .accept(MediaType.APPLICATION_JSON_UTF8)
-                        .header(Constants.HEADER_STRING, this.token))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Category 1"))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
                 .andDo(MockMvcResultHandlers.print());
     }
