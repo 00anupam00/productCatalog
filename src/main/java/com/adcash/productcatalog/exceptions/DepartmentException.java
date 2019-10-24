@@ -7,7 +7,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Getter
-public class DepartmentException extends Exception {
+class DepartmentException extends Exception {
 
     private static final long serialUID= 1L;
 

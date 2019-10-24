@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
@@ -12,7 +11,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @Embeddable
-public class ProductCategoryId implements Serializable {
+class ProductCategoryId implements Serializable {
 
     //@Column(name = "product_id")
     private int productId;

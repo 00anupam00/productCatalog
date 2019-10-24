@@ -18,12 +18,11 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 @RestController
-public class CustomerController extends TokenValidator {
+class CustomerController extends TokenValidator {
 
-    Logger log= LoggerFactory.getLogger(this.getClass());
+    private Logger log= LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private CustomerService customerService;

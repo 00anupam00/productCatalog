@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
-public class CustomErrorController{
+class CustomErrorController{
 
     @ExceptionHandler(value = AuthenticationException.class)
     public ResponseEntity<Map<String, ErrorResponseObj>> authException(AuthenticationException ex){

@@ -14,7 +14,6 @@ import com.adcash.productcatalog.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +23,7 @@ import java.util.List;
 
 
 @RestController
-public class ProductController extends TokenValidator {
+class ProductController extends TokenValidator {
 
     private Logger log= LoggerFactory.getLogger(this.getClass());
 
@@ -60,13 +59,10 @@ public class ProductController extends TokenValidator {
     /**
      * This endpoint returns a single product object using the product id.
      * @param product_id
-     * @param description_length
      * @return
      */
     @GetMapping("/products/{product_id}")
-    public ResponseEntity<Product> getProduct(@PathVariable int product_id,
-                                              @RequestParam(required = false) Integer description_length){
-        description_length = description_length == null  ? 200 : description_length;
+    public ResponseEntity<Product> getProduct(@PathVariable int product_id){
         log.info("Find a product with productId, {}", product_id);
         return ResponseEntity.ok(productService.findProductById(product_id));
     }

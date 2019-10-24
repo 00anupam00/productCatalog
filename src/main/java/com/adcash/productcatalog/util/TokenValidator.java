@@ -12,12 +12,14 @@ import org.springframework.stereotype.Component;
 public abstract class TokenValidator {
 
     @Autowired
+    private
     JwtTokenUtil jwtTokenUtil;
 
     @Autowired
+    private
     CustomerService customerService;
 
-    public Customer isTokenValid(String token) throws AuthenticationException, UserException {
+    protected Customer isTokenValid(String token) throws AuthenticationException, UserException {
         Customer customer;
         String email= jwtTokenUtil.getCustomerEmailFromKey(token);
         if(!jwtTokenUtil.isTokenValid(token)){

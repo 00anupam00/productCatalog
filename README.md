@@ -8,17 +8,31 @@ An admin user is allowed to modify the product and categories. Normal users can 
 
 **Tools used**
 
+    Name: Product Catalog
     Language: Java 8    
-    Framework: SpringBoot, Spring Security with Jwt authentication    
+    Framework: SpringBoot, Spring Security with Jwt authentication
+    Build Tool: Maven    
     Database Management: Liquibase.    
     JPA: Hibernate    
     Test Framework: Junit4 with Mockito and SpringRunner
     Database: Mysql 5.7
+    Version Control: Git
     
-**DEPLOYMENT STEPS**
+**PRE-REQUISITES**
+
+For the project to be run successfully below are the required tools to be pre-installed:
     
+    1. Java 8+
+    2. Maven 3.3+
+    3. Mysql 5.7+
+    
+**DEPLOYMENT STEPS:**   
+ 
     1. This project can be retrieved from the github by cloning the repository with the below command:
-        
+        `git clone https://github.com/00anupam00/productCatalog.git`
+    2. Is the project directory where the pom.xml, then run the command:
+        `bash start.sh`  -- For Linux systems.
+        `.\start.bat`    -- For Windows systems.
 
 **ENDPOINTS**
 

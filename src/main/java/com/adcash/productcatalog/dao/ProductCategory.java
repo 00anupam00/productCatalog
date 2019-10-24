@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Getter @Setter
 @NoArgsConstructor
 @Entity(name = "product_category")
-public class ProductCategory implements Serializable {
+class ProductCategory implements Serializable {
 
     @EmbeddedId
     private ProductCategoryId id;

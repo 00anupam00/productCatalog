@@ -27,14 +27,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 public class CustomErrorControllerTest extends TestDataUtil {
 
     @Autowired
+    private
     MockMvc mockClient;
 
     @Autowired
     ObjectMapper objectMapper;
-
-    @Before
-    public void setUp() throws Exception {
-    }
 
     @Test
     @Ignore

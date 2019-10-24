@@ -23,9 +23,11 @@ import java.util.Set;
 public class CategoryService {
 
     @Autowired
+    private
     CategoryRepository categoryRepository;
 
     @Autowired
+    private
     ProductRepository productRepository;
 
 
@@ -64,7 +66,7 @@ public class CategoryService {
         return categoryResponseObj;
     }
 
-    public Category save(CategoryRequestObj categoryRequestObj) throws ProductException {
+    public Category save(CategoryRequestObj categoryRequestObj) {
 
         Set<Product> products= new HashSet<>();
         categoryRequestObj.getProductIds().forEach(

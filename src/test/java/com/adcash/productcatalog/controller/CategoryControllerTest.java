@@ -41,15 +41,19 @@ import java.util.Optional;
 public class CategoryControllerTest extends TestDataUtil {
 
     @Autowired
+    private
     MockMvc mockClient;
 
     @Autowired
+    private
     ObjectMapper objectMapper;
 
     @MockBean
+    private
     CustomerRepository customerRepository;
 
     @MockBean
+    private
     CategoryRepository categoryRepository;
 
     private String user_token;

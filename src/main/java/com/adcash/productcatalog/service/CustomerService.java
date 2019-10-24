@@ -60,7 +60,7 @@ public class CustomerService extends Validators implements UserDetailsService {
         if(Objects.isNull(customerRequestObj.getAuthorities())){
             customer.setAuthorities(Constants.Roles.USER.name());
         }else{
-            customer.setAuthorities(customerRequestObj.getAuthorities().toString());
+            customer.setAuthorities(customerRequestObj.getAuthorities());
         }
         customer.setName(customerRequestObj.getName());
         customer.setEmail(customerRequestObj.getEmail());
@@ -92,7 +92,7 @@ public class CustomerService extends Validators implements UserDetailsService {
         return customerRepository.save(existingCustomer);
     }
 
-    public Customer updateCustomerAddress(Customer existingCustomer, CustomerRequestObj customerRequestObj) throws UserException {
+    public Customer updateCustomerAddress(Customer existingCustomer, CustomerRequestObj customerRequestObj) {
         existingCustomer.setAddress1(Objects.nonNull(customerRequestObj.getAddress1()) ? customerRequestObj.getAddress1() : existingCustomer.getAddress1());
         existingCustomer.setAddress2(Objects.nonNull(customerRequestObj.getAddress2()) ? customerRequestObj.getAddress2() : existingCustomer.getAddress2());
         existingCustomer.setCity(Objects.nonNull(customerRequestObj.getCity()) ? customerRequestObj.getCity() : existingCustomer.getCity());
@@ -157,9 +157,7 @@ public class CustomerService extends Validators implements UserDetailsService {
     private List<GrantedAuthority> parseAuthority(List<GrantedAuthority> authorities){
         List<GrantedAuthority> grantedAuthorities= new ArrayList<>();
         authorities.forEach(
-                grantedAuthority -> {
-                    grantedAuthorities.add(new SimpleGrantedAuthority(grantedAuthority.getAuthority().replace("ROLE_","")));
-                }
+                grantedAuthority -> grantedAuthorities.add(new SimpleGrantedAuthority(grantedAuthority.getAuthority().replace("ROLE_","")))
         );
         return grantedAuthorities;
     }

@@ -3,7 +3,6 @@ package com.adcash.productcatalog;
 import com.adcash.productcatalog.dao.*;
 import com.adcash.productcatalog.dto.*;
 import com.adcash.productcatalog.util.Constants;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.*;
 

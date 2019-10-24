@@ -13,7 +13,6 @@ import liquibase.util.StringUtils;
 import org.hamcrest.Matchers;
 import org.hibernate.Session;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -23,13 +22,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.util.NestedServletException;
 
 import java.util.Optional;
 
@@ -42,14 +39,17 @@ import java.util.Optional;
 public class CustomerControllerTest extends TestDataUtil {
 
     @Autowired
+    private
     MockMvc mockClient;
 
     @Autowired
+    private
     ObjectMapper objectMapper;
 
     @MockBean
     private CustomerRepository customerRepository;
     @MockBean
+    private
     Session session;
     private String user_token;
     private String admin_token;

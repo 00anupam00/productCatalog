@@ -10,7 +10,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -24,11 +23,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
+class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -63,7 +61,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         String token = req.getHeader(Constants.HEADER_STRING).split(" ")[1];
             ServletContext context= req.getServletContext();
             WebApplicationContext webApplicationContext= WebApplicationContextUtils.getWebApplicationContext(context);
-            this.jwtTokenUtil= webApplicationContext.getBean(JwtTokenUtil.class);
+            this.jwtTokenUtil= Objects.requireNonNull(webApplicationContext).getBean(JwtTokenUtil.class);
             this.customerService= webApplicationContext.getBean(CustomerService.class);
         if (token != null) {
             // parse the token.

@@ -19,14 +19,12 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
-public class CategoryController extends TokenValidator {
+class CategoryController extends TokenValidator {
 
-    Logger log= LoggerFactory.getLogger(this.getClass());
+    private Logger log= LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private CategoryService categoryService;
@@ -98,13 +96,12 @@ public class CategoryController extends TokenValidator {
      * @return
      * @throws AuthenticationException
      * @throws UserException
-     * @throws ProductException
      */
     @PutMapping("/categories/{categoryId}")
     @Secured("ROLE_ADMIN")
     public ResponseEntity<Category> update(HttpServletRequest request,
                                            @PathVariable int categoryId,
-                                           @RequestBody CategoryRequestObj categoryRequestObj) throws AuthenticationException, UserException, ProductException, CategoryException {
+                                           @RequestBody CategoryRequestObj categoryRequestObj) throws AuthenticationException, UserException, CategoryException {
         log.info("Attempting authentication against the token received.");
         Customer customer= isTokenValid(request.getHeader(Constants.HEADER_STRING));
         log.info("Admin User with email: "+customer.getEmail()+", is trying to create a category.");

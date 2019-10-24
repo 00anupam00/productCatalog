@@ -5,7 +5,6 @@ import com.adcash.productcatalog.TestDataUtil;
 import com.adcash.productcatalog.dao.Customer;
 import com.adcash.productcatalog.dao.Product;
 import com.adcash.productcatalog.dto.CustomerResponseObj;
-import com.adcash.productcatalog.dto.ProductRequestObj;
 import com.adcash.productcatalog.repository.CategoryRepository;
 import com.adcash.productcatalog.repository.CustomerRepository;
 import com.adcash.productcatalog.repository.ProductRepository;
@@ -24,20 +23,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @RunWith(SpringRunner.class)
@@ -49,18 +41,23 @@ import java.util.Optional;
 public class ProductControllerTest extends TestDataUtil {
 
     @Autowired
+    private
     MockMvc mockClient;
 
     @Autowired
+    private
     ObjectMapper objectMapper;
 
     @MockBean
+    private
     ProductRepository productRepository;
 
     @MockBean
+    private
     CategoryRepository categoryRepository;
 
     @MockBean
+    private
     CustomerRepository customerRepository;
     private String user_token;
     private String admin_token;

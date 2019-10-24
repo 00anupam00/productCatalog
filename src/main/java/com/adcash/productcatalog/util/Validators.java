@@ -33,8 +33,7 @@ public abstract class Validators {
     }
 
     protected boolean validateCreditCard(StringBuilder creditCard) throws UserException {
-        if(Objects.isNull(creditCard)
-                && String.valueOf(creditCard).length() < 16)
+        if(Objects.isNull(creditCard) || String.valueOf(creditCard).length() != 16)
             throw new UserException(Constants.USR_08_CODE, HttpStatus.NOT_ACCEPTABLE.value(), Constants.USR_08_MESSAGE, "credit_card");
         return true;
     }
@@ -46,13 +45,6 @@ public abstract class Validators {
         if(phone.length() > 100){
             throw new UserException(Constants.USR_07_CODE, HttpStatus.NOT_ACCEPTABLE.value(),
                     Constants.USR_07_MESSAGE.replace("<FIELD NAME>", "mob_phone"), "mob_phone");
-        }
-        return true;
-    }
-
-    protected boolean isShippingRegionIdValid(int shippingId) throws UserException {
-        if (Objects.isNull(shippingId)) {
-            throw new UserException(Constants.USR_09_CODE, HttpStatus.NOT_ACCEPTABLE.value(), Constants.USR_09_MESSAGE, "shippingId");
         }
         return true;
     }
