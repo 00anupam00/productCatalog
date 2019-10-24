@@ -189,6 +189,7 @@ public class ProductControllerTest extends TestDataUtil {
     @Test
     public void updateProduct() throws Exception{
         Mockito.when(productRepository.findById(Mockito.anyInt())).thenReturn(Optional.ofNullable(getProductResponseList().get(0)));
+        Mockito.when(productRepository.save(Mockito.any(Product.class))).thenReturn(getProductResponseList().get(0));
         Mockito.when(categoryRepository.findById(Mockito.anyInt())).thenReturn(Optional.ofNullable(getCategoryData()));
         Mockito.when(customerRepository.findByEmail(Mockito.anyString())).thenReturn(getCustomerResponseObj().get(0).getCustomer());
         mockClient.perform(

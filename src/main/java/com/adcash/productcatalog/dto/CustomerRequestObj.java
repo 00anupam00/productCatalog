@@ -34,5 +34,5 @@ public class CustomerRequestObj implements Serializable {
     private String postalCode;
     private String country;
     private String mobPhone;
-    private List<String> authorities;
+    private String authorities;
 }

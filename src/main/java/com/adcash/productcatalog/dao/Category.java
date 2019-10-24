@@ -23,19 +23,7 @@ public class Category implements Serializable {
         @Column(length = 1000)
         private String description;
 
-        @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-        @JoinTable(
-                name = "product_category",
-                joinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "category_id")},
-                inverseJoinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "product_id")}
-        )
+        @OneToMany(mappedBy = "category",fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
         @JsonIgnoreProperties("categories")
         private Set<Product> products= new HashSet<>();
-
-        @OneToMany(
-                mappedBy = "category",
-                cascade = CascadeType.ALL,
-                orphanRemoval = true
-        )
-        private Set<ProductCategory> productCategories= new HashSet<>();
 }

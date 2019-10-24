@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -80,6 +81,7 @@ public class CustomerController extends TokenValidator {
      * @throws UserException
      */
     @PutMapping("/customer")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Customer> updateCustomer(HttpServletRequest request, @RequestBody CustomerRequestObj customerRequestObj)
             throws AuthenticationException, UserException {
         log.info("Authenticating a customer with the request token.");
@@ -99,6 +101,7 @@ public class CustomerController extends TokenValidator {
      * @throws UserException
      */
     @PutMapping("/customer/address")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Customer> updateCustomerAddress(HttpServletRequest request, @RequestBody CustomerRequestObj customerRequestObj)
             throws AuthenticationException, UserException {
         log.info("Authenticating a customer with the request token, for customer address update.");
@@ -118,6 +121,7 @@ public class CustomerController extends TokenValidator {
      * @throws UserException
      */
     @PutMapping("/customer/creditCard")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Customer> updateCreditCard(HttpServletRequest request, @RequestBody CustomerRequestObj customerRequestObj) throws AuthenticationException, UserException {
         log.info("Authenticating a customer with the request token, for credit card update request.");
         Customer customer= isTokenValid(request.getHeader(Constants.HEADER_STRING));

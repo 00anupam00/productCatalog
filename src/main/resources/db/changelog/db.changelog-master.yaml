@@ -1,3 +1,28 @@
 databaseChangeLog:
-  - include:
-      file: db/changelog/setup/initialSetup
+  - changeSet:
+      id: insert-admin
+      author: rakshit.anupam@hotmail.com
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: customer_id
+                  type: int
+                  value: 0
+              - column:
+                  name: name
+                  type: varchar(50)
+                  value: "admin"
+              - column:
+                  name: email
+                  type: varchar(100)
+                  value: "admin@admin.com"
+              - column:
+                  name: password
+                  type: varchar(100)
+                  value: "admin"
+              - column:
+                  name: authorities
+                  type: TEXT
+                  value: "ADMIN"
+            tableName: customer

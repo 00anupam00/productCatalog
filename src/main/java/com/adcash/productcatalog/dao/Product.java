@@ -35,12 +35,4 @@ public class Product {
     @JsonIgnoreProperties("products")
     private Category category;
 
-    @OneToMany(
-            mappedBy = "product",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @JsonIgnore
-    private Set<ProductCategory> productCategories= new HashSet<>();
-
 }

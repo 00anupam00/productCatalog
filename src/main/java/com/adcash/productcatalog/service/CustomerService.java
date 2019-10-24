@@ -153,4 +153,14 @@ public class CustomerService extends Validators implements UserDetailsService {
                 new BCryptPasswordEncoder().encode(customer.getPassword()),
                 jwtTokenUtil.getAuthoritiesList(customer.getAuthorities()));
     }
+
+    private List<GrantedAuthority> parseAuthority(List<GrantedAuthority> authorities){
+        List<GrantedAuthority> grantedAuthorities= new ArrayList<>();
+        authorities.forEach(
+                grantedAuthority -> {
+                    grantedAuthorities.add(new SimpleGrantedAuthority(grantedAuthority.getAuthority().replace("ROLE_","")));
+                }
+        );
+        return grantedAuthorities;
+    }
 }

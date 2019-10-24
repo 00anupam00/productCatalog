@@ -18,7 +18,7 @@ public class Constants {
     //Roles
     public enum Roles{
         USER, ADMIN
-    };
+    }
 
     //Exception codes
     public static final String AUT_01_CODE = "AUT_01";
