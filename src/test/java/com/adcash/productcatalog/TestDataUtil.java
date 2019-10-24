@@ -16,7 +16,7 @@ public abstract class TestDataUtil {
         customerRequestObj.setPassword("12345pwd");
         customerRequestObj.setEmail("anupam@gmail.com");
         customerRequestObj.setAddress1("Estonia");
-        customerRequestObj.setCreditCard(new StringBuilder("xxxx-xxxx-xxxx-xxxx"));
+        customerRequestObj.setCreditCard(new StringBuilder("xxxxxxxxxxxxxxxx"));
         customerRequestObj.setAuthorities(Constants.Roles.ADMIN.name());
         customerRequestObjs.add(customerRequestObj);
 
@@ -25,7 +25,7 @@ public abstract class TestDataUtil {
         customerRequestObj1.setPassword("12345pwd");
         customerRequestObj1.setEmail("anupam12@gmail.com");
         customerRequestObj1.setAddress1("Estonia");
-        customerRequestObj1.setCreditCard(new StringBuilder("xxxx-xxxx-xxxx-xxxx"));
+        customerRequestObj1.setCreditCard(new StringBuilder("xxxxxxxxxxxxxxxx"));
         customerRequestObj1.setAuthorities(Constants.Roles.USER.name());
         customerRequestObjs.add(customerRequestObj1);
 

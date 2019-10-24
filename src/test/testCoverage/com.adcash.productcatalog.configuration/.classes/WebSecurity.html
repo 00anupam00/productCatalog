@@ -1,0 +1,166 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: WebSecurity</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.adcash.productcatalog.configuration</a> ]
+</div>
+
+<h1>Coverage Summary for Class: WebSecurity (com.adcash.productcatalog.configuration)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WebSecurity</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (27/ 27)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">WebSecurity$$EnhancerBySpringCGLIB$$617ac358</td>
+  </tr>
+  <tr>
+    <td class="name">WebSecurity$$EnhancerBySpringCGLIB$$617ac358$$FastClassBySpringCGLIB$$f451bc4e</td>
+  </tr>
+  <tr>
+    <td class="name">WebSecurity$$FastClassBySpringCGLIB$$77ce1ba3</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (27/ 27)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.adcash.productcatalog.configuration;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.adcash.productcatalog.service.CustomerService;
+<i>4</i>&nbsp;import com.adcash.productcatalog.util.Constants;
+<i>5</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>6</i>&nbsp;import org.springframework.context.annotation.Bean;
+<i>7</i>&nbsp;import org.springframework.context.annotation.Configuration;
+<i>8</i>&nbsp;import org.springframework.http.HttpMethod;
+<i>9</i>&nbsp;import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+<i>10</i>&nbsp;import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+<i>11</i>&nbsp;import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+<i>12</i>&nbsp;import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+<i>13</i>&nbsp;import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+<i>14</i>&nbsp;import org.springframework.security.config.http.SessionCreationPolicy;
+<i>15</i>&nbsp;import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+<i>16</i>&nbsp;import org.springframework.security.crypto.password.PasswordEncoder;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;@Configuration
+<i>20</i>&nbsp;@EnableWebSecurity
+<i>21</i>&nbsp;@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+<i>22</i>&nbsp;class WebSecurity extends WebSecurityConfigurerAdapter {
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    @Autowired
+<i>25</i>&nbsp;    private CustomerService customerService;
+<i>26</i>&nbsp;
+<b class="fc"><i>27</i>&nbsp;    public WebSecurity(CustomerService customerService) {</b>
+<b class="fc"><i>28</i>&nbsp;        this.customerService = customerService;</b>
+<b class="fc"><i>29</i>&nbsp;    }</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    @Override
+<i>32</i>&nbsp;    protected void configure(HttpSecurity http) throws Exception {
+<b class="fc"><i>33</i>&nbsp;        http.cors().and().csrf().disable()</b>
+<b class="fc"><i>34</i>&nbsp;                .authorizeRequests()</b>
+<b class="fc"><i>35</i>&nbsp;                .antMatchers(HttpMethod.POST, Constants.SAVE_CUSTOMERS).permitAll()</b>
+<b class="fc"><i>36</i>&nbsp;                .antMatchers(HttpMethod.POST, Constants.LOGIN_CUSTOMERS).permitAll()</b>
+<b class="fc"><i>37</i>&nbsp;                .antMatchers(HttpMethod.GET, Constants.PRODUCTS_API).permitAll()</b>
+<b class="fc"><i>38</i>&nbsp;                .antMatchers(HttpMethod.GET, Constants.ALL_PRODUCTS_API).permitAll()</b>
+<b class="fc"><i>39</i>&nbsp;                .antMatchers(HttpMethod.GET, Constants.CATEGORY_API).permitAll()</b>
+<b class="fc"><i>40</i>&nbsp;                .antMatchers(HttpMethod.GET, Constants.ALL_CATEGORY_API).permitAll()</b>
+<b class="fc"><i>41</i>&nbsp;                .anyRequest().authenticated()</b>
+<b class="fc"><i>42</i>&nbsp;                .antMatchers(HttpMethod.POST, Constants.CATEGORY_API).hasRole(Constants.Roles.ADMIN.name())</b>
+<b class="fc"><i>43</i>&nbsp;                .antMatchers(HttpMethod.POST, Constants.PRODUCTS_API).hasRole(Constants.Roles.ADMIN.name())</b>
+<b class="fc"><i>44</i>&nbsp;                .antMatchers(HttpMethod.DELETE, Constants.PRODUCTS_API).hasRole(Constants.Roles.ADMIN.name())</b>
+<b class="fc"><i>45</i>&nbsp;                .antMatchers(HttpMethod.PUT, Constants.PRODUCTS_API).hasRole(Constants.Roles.ADMIN.name())</b>
+<b class="fc"><i>46</i>&nbsp;                .anyRequest().authenticated()</b>
+<b class="fc"><i>47</i>&nbsp;                .and()</b>
+<b class="fc"><i>48</i>&nbsp;                .addFilter(new JwtAuthenticationFilter(authenticationManager()))</b>
+<b class="fc"><i>49</i>&nbsp;                .addFilter(new JwtAuthorizationFilter(authenticationManager()))</b>
+<b class="fc"><i>50</i>&nbsp;                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)</b>
+<b class="fc"><i>51</i>&nbsp;        .and()</b>
+<b class="fc"><i>52</i>&nbsp;        .formLogin().disable();</b>
+<i>53</i>&nbsp;        //.loginPage(&quot;/customers/login&quot;)
+<i>54</i>&nbsp;        //.defaultSuccessUrl(&quot;/products&quot;)
+<i>55</i>&nbsp;        //.permitAll();
+<b class="fc"><i>56</i>&nbsp;    }</b>
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    @Override
+<i>59</i>&nbsp;    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+<b class="fc"><i>60</i>&nbsp;        auth.userDetailsService(customerService);</b>
+<b class="fc"><i>61</i>&nbsp;    }</b>
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    @Bean
+<i>64</i>&nbsp;    public PasswordEncoder passwordEncoder() {
+<b class="fc"><i>65</i>&nbsp;        return new BCryptPasswordEncoder();</b>
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-10-25 01:11</div>
+</div>
+</body>
+</html>

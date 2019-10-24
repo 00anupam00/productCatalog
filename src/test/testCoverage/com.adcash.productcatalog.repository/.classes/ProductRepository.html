@@ -1,0 +1,73 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ProductRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.adcash.productcatalog.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ProductRepository (com.adcash.productcatalog.repository)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">ProductRepository$MockitoMock$531859409</td>
+  </tr>
+  <tr>
+    <td class="name">ProductRepository$MockitoMock$531859409$auxiliary$pne9LZ6r</td>
+  </tr>
+  <tr>
+    <td class="name">ProductRepository$MockitoMock$531859409$auxiliary$zDaYhwmg</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.adcash.productcatalog.repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.adcash.productcatalog.dao.Product;
+<i>4</i>&nbsp;import org.springframework.data.jpa.repository.Query;
+<i>5</i>&nbsp;import org.springframework.data.repository.PagingAndSortingRepository;
+<i>6</i>&nbsp;import org.springframework.data.repository.query.Param;
+<i>7</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import java.util.List;
+<i>10</i>&nbsp;import java.util.Optional;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;@Repository
+<i>13</i>&nbsp;public interface ProductRepository extends PagingAndSortingRepository&lt;Product, Integer&gt; {
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    @Query(&quot;select p from product p where p.productId in (select pc.product.productId from product_category pc where pc.category.categoryId=?1)&quot;)
+<i>16</i>&nbsp;    Optional&lt;List&lt;Product&gt;&gt; findAllByCategory(@Param(&quot;categoryId&quot;) int category_id);
+<i>17</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-10-25 01:11</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Validators</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.adcash.productcatalog.util</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Validators (com.adcash.productcatalog.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Validators</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    42.9%
+  </span>
+  <span class="absValue">
+    (12/ 28)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.adcash.productcatalog.util;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.adcash.productcatalog.exceptions.UserException;
+<i>4</i>&nbsp;import org.apache.commons.validator.routines.EmailValidator;
+<i>5</i>&nbsp;import org.springframework.http.HttpStatus;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import java.util.Objects;
+<i>8</i>&nbsp;
+<b class="fc"><i>9</i>&nbsp;public abstract class Validators {</b>
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    protected boolean validateEmail(String email) throws UserException {
+<b class="fc"><i>12</i>&nbsp;        if(Objects.isNull(email)){</b>
+<b class="nc"><i>13</i>&nbsp;            throw new UserException(Constants.USR_02_CODE, HttpStatus.UNAUTHORIZED.value(), Constants.USR_02_MESSAGE, &quot;Email&quot;);</b>
+<i>14</i>&nbsp;        }
+<b class="fc"><i>15</i>&nbsp;        if(!EmailValidator.getInstance().isValid(email)){</b>
+<b class="nc"><i>16</i>&nbsp;            throw new UserException(Constants.USR_03_CODE, HttpStatus.UNAUTHORIZED.value(), Constants.USR_03_MESSAGE, &quot;Email&quot;);</b>
+<i>17</i>&nbsp;        }
+<b class="fc"><i>18</i>&nbsp;        if(email.length() &gt; 100){</b>
+<b class="nc"><i>19</i>&nbsp;            throw new UserException(Constants.USR_07_CODE, HttpStatus.NOT_ACCEPTABLE.value(),</b>
+<b class="nc"><i>20</i>&nbsp;                    Constants.USR_07_MESSAGE.replace(&quot;&lt;FIELD NAME&gt;&quot;, &quot;email&quot;), &quot;email&quot;);</b>
+<i>21</i>&nbsp;        }
+<b class="fc"><i>22</i>&nbsp;        return true;</b>
+<i>23</i>&nbsp;    }
+<i>24</i>&nbsp;    protected boolean isPasswordValid(String pass) throws UserException {
+<b class="fc"><i>25</i>&nbsp;        if(Objects.isNull(pass)){</b>
+<b class="nc"><i>26</i>&nbsp;            throw new UserException(Constants.USR_02_CODE, HttpStatus.UNAUTHORIZED.value(), Constants.USR_02_MESSAGE, &quot;Password&quot;);</b>
+<i>27</i>&nbsp;        }
+<b class="fc"><i>28</i>&nbsp;        if(pass.length() &gt; 100){</b>
+<b class="nc"><i>29</i>&nbsp;            throw new UserException(Constants.USR_07_CODE, HttpStatus.NOT_ACCEPTABLE.value(),</b>
+<b class="nc"><i>30</i>&nbsp;                    Constants.USR_07_MESSAGE.replace(&quot;&lt;FIELD NAME&gt;&quot;, &quot;password&quot;), &quot;password&quot;);</b>
+<i>31</i>&nbsp;        }
+<b class="fc"><i>32</i>&nbsp;        return true;</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    protected boolean validateCreditCard(StringBuilder creditCard) throws UserException {
+<b class="fc"><i>36</i>&nbsp;        if(Objects.isNull(creditCard) || String.valueOf(creditCard).length() != 16)</b>
+<b class="nc"><i>37</i>&nbsp;            throw new UserException(Constants.USR_08_CODE, HttpStatus.NOT_ACCEPTABLE.value(), Constants.USR_08_MESSAGE, &quot;credit_card&quot;);</b>
+<b class="fc"><i>38</i>&nbsp;        return true;</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    protected boolean isPhoneNumberValid(String phone) throws UserException {
+<b class="nc"><i>42</i>&nbsp;        if (Objects.isNull(phone)) {</b>
+<b class="nc"><i>43</i>&nbsp;            throw new UserException(Constants.USR_06_CODE, HttpStatus.NOT_ACCEPTABLE.value(), Constants.USR_06_MESSAGE, &quot;phone&quot;);</b>
+<i>44</i>&nbsp;        }
+<b class="nc"><i>45</i>&nbsp;        if(phone.length() &gt; 100){</b>
+<b class="nc"><i>46</i>&nbsp;            throw new UserException(Constants.USR_07_CODE, HttpStatus.NOT_ACCEPTABLE.value(),</b>
+<b class="nc"><i>47</i>&nbsp;                    Constants.USR_07_MESSAGE.replace(&quot;&lt;FIELD NAME&gt;&quot;, &quot;mob_phone&quot;), &quot;mob_phone&quot;);</b>
+<i>48</i>&nbsp;        }
+<b class="nc"><i>49</i>&nbsp;        return true;</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    protected boolean validateName(String name) throws UserException {
+<b class="fc"><i>53</i>&nbsp;        if(Objects.nonNull(name) &amp;&amp; name.length() &gt; 50){</b>
+<b class="nc"><i>54</i>&nbsp;            throw new UserException(Constants.USR_07_CODE, HttpStatus.NOT_ACCEPTABLE.value(),</b>
+<b class="nc"><i>55</i>&nbsp;                    Constants.USR_07_MESSAGE.replace(&quot;&lt;FIELD NAME&gt;&quot;, &quot;customer_name&quot;), &quot;customer_name&quot;);</b>
+<i>56</i>&nbsp;        }
+<b class="fc"><i>57</i>&nbsp;        return true;</b>
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-10-25 01:11</div>
+</div>
+</body>
+</html>
