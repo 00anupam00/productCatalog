@@ -1,12 +1,41 @@
-changeSet:
-  id: Product Catalog app
-  author: Anupam Rakshit<rakshit.anupam@hotmail.com>
-  changes:
-    - sqlFile:
-        dbms: sql
-        encoding: utf8
-        endDelimiter: \nGO
-        path: database/dump.sql
-        relativeToChangelogFile: true
-        splitStatements: true
-        stripComments: true
+databaseChangeLog:
+  - changeSet:
+      id: Product Catalog app
+      author: Anupam Rakshit<rakshit.anupam@hotmail.com>
+      changes:
+        - sqlFile:
+            dbms: sql
+            encoding: utf8
+            endDelimiter: \nGO
+            path: database/dump.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true
+
+  - changeSet:
+      id: insert-admin
+      author: rakshit.anupam@hotmail.com
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: customer_id
+                  type: int
+                  value: 0
+              - column:
+                  name: name
+                  type: varchar(50)
+                  value: "admin"
+              - column:
+                  name: email
+                  type: varchar(100)
+                  value: "admin@admin.com"
+              - column:
+                  name: password
+                  type: varchar(100)
+                  value: "admin"
+              - column:
+                  name: authorities
+                  type: TEXT
+                  value: "ADMIN"
+            tableName: customer
